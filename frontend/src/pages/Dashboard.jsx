@@ -32,8 +32,8 @@ export default function Dashboard() {
     { icon: '✅', label: 'Product Management',    done: true  },
     { icon: '✅', label: 'Categories',            done: true  },
     { icon: '✅', label: 'Inventory Tracking',    done: true  },
-    { icon: '⏳', label: 'Supplier Management',   done: false },
-    { icon: '⏳', label: 'Purchase Management',   done: false },
+    { icon: '✅', label: 'Supplier Management',   done: true  },
+    { icon: '✅', label: 'Purchase Management',   done: true  },
     { icon: '⏳', label: 'Point of Sale',         done: false },
     { icon: '⏳', label: 'Reporting',             done: false },
   ]
@@ -45,9 +45,9 @@ export default function Dashboard() {
       <div className="page-header">
         <div>
           <h1>Welcome back, {user?.full_name?.split(' ')[0]} 👋</h1>
-          <p className="page-subtitle">Vickers Cottage Inventory & POS — Phase 2: Inventory</p>
+          <p className="page-subtitle">Vickers Cottage Inventory & POS — Phase 3: Procurement</p>
         </div>
-        <div className="phase-badge">Phase 2</div>
+        <div className="phase-badge">Phase 3</div>
       </div>
 
       {/* Summary cards */}
@@ -108,7 +108,7 @@ export default function Dashboard() {
           <table className="info-table">
             <tbody>
               <tr><td>Project</td><td>Vickers Cottage Inventory & POS</td></tr>
-              <tr><td>Phase</td><td><strong>Phase 2 — Inventory</strong></td></tr>
+              <tr><td>Phase</td><td><strong>Phase 3 — Procurement</strong></td></tr>
               <tr><td>Frontend</td><td>React + Vite</td></tr>
               <tr><td>Backend</td><td>Node.js + Express</td></tr>
               <tr><td>Database</td><td>PostgreSQL (Supabase)</td></tr>
@@ -125,7 +125,8 @@ export default function Dashboard() {
               { icon: '📦', label: 'Products',    path: '/dashboard/products',  active: true },
               { icon: '🏷️', label: 'Categories',  path: '/dashboard/categories', active: true },
               { icon: '📋', label: 'Inventory',   path: '/dashboard/inventory',  active: true },
-              { icon: '🚚', label: 'Suppliers',   path: '/dashboard/suppliers', phase: '3' },
+              { icon: '🚚', label: 'Suppliers',   path: '/dashboard/suppliers', active: true },
+              { icon: '🛒', label: 'Purchases',   path: '/dashboard/purchases', active: true },
               { icon: '💰', label: 'Point of Sale', path: '/dashboard/pos',     phase: '4' },
               { icon: '📈', label: 'Reports',     path: '/dashboard/reports',   phase: '5' },
             ].map(l => (

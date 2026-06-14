@@ -8,6 +8,8 @@ const userRoutes = require('./routes/users')
 const categoryRoutes = require('./routes/categories')
 const productRoutes = require('./routes/products')
 const inventoryRoutes = require('./routes/inventory')
+const supplierRoutes = require('./routes/suppliers')
+const purchaseRoutes = require('./routes/purchases')
 
 const app = express()
 
@@ -41,13 +43,15 @@ app.use('/api/users',     userRoutes)
 app.use('/api/categories', categoryRoutes)
 app.use('/api/products',  productRoutes)
 app.use('/api/inventory', inventoryRoutes)
+app.use('/api/suppliers', supplierRoutes)
+app.use('/api/purchases', purchaseRoutes)
 
 // Health check
 app.get('/api/health', (req, res) => {
   res.json({
     status: 'ok',
     service: 'Vickers Cottage API',
-    phase: 'Phase 2 — Inventory',
+    phase: 'Phase 3 — Procurement',
     timestamp: new Date().toISOString(),
   })
 })

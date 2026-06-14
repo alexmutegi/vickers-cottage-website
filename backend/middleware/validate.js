@@ -77,6 +77,33 @@ const inventoryTransactionRules = [
   body('notes').optional().isString(),
 ]
 
+// ── Suppliers ──────────────────────────────────────────────────
+const supplierRules = [
+  body('supplier_name').trim().notEmpty().withMessage('Supplier name is required')
+    .isLength({ max: 200 }).withMessage('Supplier name too long'),
+  body('phone').optional({ checkFalsy: true }).isString().isLength({ max: 20 }).withMessage('Phone number too long'),
+  body('email').optional({ checkFalsy: true }).isEmail().withMessage('Invalid email address'),
+  body('address').optional({ checkFalsy: true }).isString(),
+]
+
+const supplierUpdateRules = [
+  body('supplier_name').optional().trim().notEmpty().withMessage('Supplier name cannot be empty'),
+  body('phone').optional({ checkFalsy: true }).isString().isLength({ max: 20 }).withMessage('Phone number too long'),
+  body('email').optional({ checkFalsy: true }).isEmail().withMessage('Invalid email address'),
+  body('address').optional({ checkFalsy: true }).isString(),
+]
+
+// ── Purchases ──────────────────────────────────────────────────
+const purchaseRules = [
+  body('supplier_id').optional({ nullable: true }).isUUID().withMessage('Invalid supplier'),
+  body('purchase_date').optional({ checkFalsy: true }).isISO8601().withMessage('Invalid date'),
+  body('notes').optional().isString(),
+  body('items').isArray({ min: 1 }).withMessage('At least one item is required'),
+  body('items.*.product_id').isUUID().withMessage('Each item needs a valid product ID'),
+  body('items.*.quantity').isInt({ min: 1 }).withMessage('Each item quantity must be at least 1'),
+  body('items.*.cost').isFloat({ min: 0 }).withMessage('Each item cost must be 0 or more'),
+]
+
 module.exports = {
   handleValidation,
   loginRules,
@@ -87,4 +114,7 @@ module.exports = {
   productRules,
   productUpdateRules,
   inventoryTransactionRules,
+  supplierRules,
+  supplierUpdateRules,
+  purchaseRules,
 }
