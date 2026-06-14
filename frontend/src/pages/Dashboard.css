@@ -121,3 +121,53 @@
 .low-stock-name { font-weight: 600; color: var(--text); }
 .low-stock-qty { color: #c0392b; font-weight: 700; font-size: 0.8rem; }
 .low-stock-more { font-size: 0.8rem; color: var(--text-muted); margin-top: 10px; }
+
+/* Top products */
+.top-products-list { display: flex; flex-direction: column; gap: 8px; }
+.top-product-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  background: #f8fafc;
+  border-radius: 8px;
+}
+.top-product-rank {
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: var(--primary);
+  width: 24px;
+}
+.top-product-info { flex: 1; min-width: 0; }
+.top-product-name { font-size: 0.85rem; font-weight: 600; color: var(--text); }
+.top-product-sku { font-size: 0.7rem; color: var(--text-muted); font-family: monospace; }
+.top-product-stats { text-align: right; }
+.top-product-units { font-size: 0.78rem; font-weight: 700; color: var(--text); }
+.top-product-revenue { font-size: 0.72rem; color: #1a7a4a; font-weight: 600; }
+
+/* Recent sales */
+.recent-sales-list { display: flex; flex-direction: column; gap: 8px; }
+.recent-sale-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 10px;
+  background: #f8fafc;
+  border-radius: 8px;
+}
+.recent-sale-amount { font-size: 0.92rem; font-weight: 800; color: var(--primary); }
+.recent-sale-meta { font-size: 0.72rem; color: var(--text-muted); margin-top: 2px; }
+.recent-sale-right { text-align: right; }
+.recent-sale-time { font-size: 0.7rem; color: var(--text-muted); margin-top: 3px; }
+
+.payment-pill {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+.payment-cash { background: #f0faf5; color: #1a7a4a; }
+.payment-card { background: #eaf2fb; color: #1e3a5f; }
+.payment-mobile_money { background: #fff7e6; color: #b8860b; }

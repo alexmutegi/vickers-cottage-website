@@ -10,6 +10,7 @@ import Categories from './pages/Categories'
 import Inventory from './pages/Inventory'
 import Suppliers from './pages/Suppliers'
 import Purchases from './pages/Purchases'
+import POS from './pages/POS'
 import './pages/Login.css'
 import './layouts/DashboardLayout.css'
 import './pages/Users.css'
@@ -18,6 +19,8 @@ import './pages/Categories.css'
 import './pages/Inventory.css'
 import './pages/Suppliers.css'
 import './pages/Purchases.css'
+import './pages/POS.css'
+import './components/Receipt.css'
 
 // Placeholder pages for phases 3-5
 const ComingSoon = ({ title }) => (
@@ -40,7 +43,7 @@ export default function App() {
           <Route element={<ProtectedRoute roles={['admin','manager','cashier']} />}>
             <Route element={<DashboardLayout />}>
               <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/dashboard/pos" element={<ComingSoon title="Point of Sale — Phase 4" />} />
+              <Route path="/dashboard/pos" element={<POS />} />
             </Route>
           </Route>
 

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useAuth } from '../context/AuthContext'
-import { ProductsAPI } from '../services/inventoryApi'
+import { ProductsAPI, SalesAPI } from '../services/inventoryApi'
 import './Dashboard.css'
 
 export default function Dashboard() {
@@ -9,6 +9,7 @@ export default function Dashboard() {
 
   const [stats, setStats] = useState(null)
   const [lowStock, setLowStock] = useState([])
+  const [salesSummary, setSalesSummary] = useState(null)
   const [loading, setLoading] = useState(canViewInventory)
 
   useEffect(() => {
@@ -16,10 +17,12 @@ export default function Dashboard() {
     Promise.all([
       ProductsAPI.getInventoryValue(),
       ProductsAPI.getLowStock(),
+      SalesAPI.getDashboardSummary(),
     ])
-      .then(([value, low]) => {
+      .then(([value, low, sales]) => {
         setStats(value)
         setLowStock(low.products)
+        setSalesSummary(sales)
       })
       .catch(() => {})
       .finally(() => setLoading(false))
@@ -34,7 +37,7 @@ export default function Dashboard() {
     { icon: '✅', label: 'Inventory Tracking',    done: true  },
     { icon: '✅', label: 'Supplier Management',   done: true  },
     { icon: '✅', label: 'Purchase Management',   done: true  },
-    { icon: '⏳', label: 'Point of Sale',         done: false },
+    { icon: '✅', label: 'Point of Sale',         done: true  },
     { icon: '⏳', label: 'Reporting',             done: false },
   ]
 
@@ -45,16 +48,16 @@ export default function Dashboard() {
       <div className="page-header">
         <div>
           <h1>Welcome back, {user?.full_name?.split(' ')[0]} 👋</h1>
-          <p className="page-subtitle">Vickers Cottage Inventory & POS — Phase 3: Procurement</p>
+          <p className="page-subtitle">Vickers Cottage Inventory & POS — Phase 4: Sales (POS)</p>
         </div>
-        <div className="phase-badge">Phase 3</div>
+        <div className="phase-badge">Phase 4</div>
       </div>
 
       {/* Summary cards */}
       <div className="stats-grid">
         {[
-          { icon: '📦', label: 'Total Products',     value: loading ? '…' : (stats?.total_products ?? '—'), sub: canViewInventory ? 'Live' : 'Phase 2' },
-          { icon: '🧮', label: 'Total Units in Stock', value: loading ? '…' : (stats?.total_units ?? '—'), sub: canViewInventory ? 'Live' : 'Phase 2' },
+          { icon: '💰', label: "Today's Sales",       value: loading ? '…' : (canViewInventory ? fmt(salesSummary?.today?.total_sales) : '—'), sub: canViewInventory ? 'Live' : 'Phase 4' },
+          { icon: '📈', label: "Today's Profit",      value: loading ? '…' : (canViewInventory ? fmt(salesSummary?.today?.total_profit) : '—'), sub: canViewInventory ? 'Live' : 'Phase 4' },
           { icon: '📊', label: 'Inventory Value (Cost)', value: loading ? '…' : (canViewInventory ? fmt(stats?.total_cost_value) : '—'), sub: canViewInventory ? 'Live' : 'Phase 2' },
           { icon: '⚠️', label: 'Low Stock Alerts',    value: loading ? '…' : (canViewInventory ? lowStock.length : '—'), sub: canViewInventory ? 'Live' : 'Phase 2' },
         ].map(s => (
@@ -87,6 +90,60 @@ export default function Dashboard() {
         </div>
       )}
 
+      {/* Sales insights */}
+      {canViewInventory && !loading && salesSummary && (
+        <div className="info-grid">
+          <div className="section-card">
+            <h2>🏆 Top-Selling Products (30 days)</h2>
+            {salesSummary.topProducts.length === 0 ? (
+              <p className="empty-cell">No sales recorded yet</p>
+            ) : (
+              <div className="top-products-list">
+                {salesSummary.topProducts.map((p, i) => (
+                  <div key={p.id} className="top-product-item">
+                    <span className="top-product-rank">#{i + 1}</span>
+                    <div className="top-product-info">
+                      <div className="top-product-name">{p.name}</div>
+                      <div className="top-product-sku">{p.sku}</div>
+                    </div>
+                    <div className="top-product-stats">
+                      <div className="top-product-units">{p.units_sold} sold</div>
+                      <div className="top-product-revenue">{fmt(p.revenue)}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+
+          <div className="section-card">
+            <h2>🧾 Recent Sales</h2>
+            {salesSummary.recentSales.length === 0 ? (
+              <p className="empty-cell">No sales recorded yet</p>
+            ) : (
+              <div className="recent-sales-list">
+                {salesSummary.recentSales.map(s => (
+                  <div key={s.id} className="recent-sale-item">
+                    <div className="recent-sale-info">
+                      <div className="recent-sale-amount">{fmt(s.total_amount)}</div>
+                      <div className="recent-sale-meta">
+                        {s.item_count} item{s.item_count !== 1 ? 's' : ''} · {s.cashier_name || '—'}
+                      </div>
+                    </div>
+                    <div className="recent-sale-right">
+                      <span className={`payment-pill payment-${s.payment_method}`}>
+                        {s.payment_method.replace('_', ' ')}
+                      </span>
+                      <div className="recent-sale-time">{new Date(s.sale_date).toLocaleTimeString()}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
       {/* Phase progress */}
       <div className="section-card">
         <h2>Development Roadmap</h2>
@@ -108,7 +165,7 @@ export default function Dashboard() {
           <table className="info-table">
             <tbody>
               <tr><td>Project</td><td>Vickers Cottage Inventory & POS</td></tr>
-              <tr><td>Phase</td><td><strong>Phase 3 — Procurement</strong></td></tr>
+              <tr><td>Phase</td><td><strong>Phase 4 — Sales (POS)</strong></td></tr>
               <tr><td>Frontend</td><td>React + Vite</td></tr>
               <tr><td>Backend</td><td>Node.js + Express</td></tr>
               <tr><td>Database</td><td>PostgreSQL (Supabase)</td></tr>
@@ -122,12 +179,12 @@ export default function Dashboard() {
           <h2>Quick Access</h2>
           <div className="quick-links">
             {[
+              { icon: '💰', label: 'Point of Sale', path: '/dashboard/pos',       active: true },
               { icon: '📦', label: 'Products',    path: '/dashboard/products',  active: true },
               { icon: '🏷️', label: 'Categories',  path: '/dashboard/categories', active: true },
               { icon: '📋', label: 'Inventory',   path: '/dashboard/inventory',  active: true },
               { icon: '🚚', label: 'Suppliers',   path: '/dashboard/suppliers', active: true },
               { icon: '🛒', label: 'Purchases',   path: '/dashboard/purchases', active: true },
-              { icon: '💰', label: 'Point of Sale', path: '/dashboard/pos',     phase: '4' },
               { icon: '📈', label: 'Reports',     path: '/dashboard/reports',   phase: '5' },
             ].map(l => (
               l.active ? (
