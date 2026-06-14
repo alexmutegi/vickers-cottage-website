@@ -11,6 +11,7 @@ const inventoryRoutes = require('./routes/inventory')
 const supplierRoutes = require('./routes/suppliers')
 const purchaseRoutes = require('./routes/purchases')
 const saleRoutes = require('./routes/sales')
+const reportRoutes = require('./routes/reports')
 
 const app = express()
 
@@ -47,13 +48,14 @@ app.use('/api/inventory', inventoryRoutes)
 app.use('/api/suppliers', supplierRoutes)
 app.use('/api/purchases', purchaseRoutes)
 app.use('/api/sales',     saleRoutes)
+app.use('/api/reports',   reportRoutes)
 
 // Health check
 app.get('/api/health', (req, res) => {
   res.json({
     status: 'ok',
     service: 'Vickers Cottage API',
-    phase: 'Phase 4 — Sales (POS)',
+    phase: 'Phase 5 — Reporting',
     timestamp: new Date().toISOString(),
   })
 })
