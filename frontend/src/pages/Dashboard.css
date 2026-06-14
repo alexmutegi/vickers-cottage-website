@@ -96,3 +96,28 @@
   padding: 2px 8px;
   border-radius: 10px;
 }
+.ql-live {
+  background: #f0faf5;
+  color: #1a7a4a;
+  font-weight: 700;
+}
+.quick-link { text-decoration: none; color: var(--text); }
+
+.low-stock-banner { border-left: 4px solid #c0392b; }
+.low-stock-banner h2 { color: #c0392b; }
+.low-stock-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 8px;
+}
+.low-stock-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 12px;
+  background: #fdecea;
+  border-radius: 8px;
+  font-size: 0.85rem;
+}
+.low-stock-name { font-weight: 600; color: var(--text); }
+.low-stock-qty { color: #c0392b; font-weight: 700; font-size: 0.8rem; }
+.low-stock-more { font-size: 0.8rem; color: var(--text-muted); margin-top: 10px; }

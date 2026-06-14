@@ -6,6 +6,7 @@ import './DashboardLayout.css'
 const NAV_ITEMS = [
   { to: '/dashboard',           icon: '📊', label: 'Dashboard',   roles: ['admin','manager','cashier'] },
   { to: '/dashboard/products',  icon: '📦', label: 'Products',    roles: ['admin','manager'] },
+  { to: '/dashboard/categories', icon: '🏷️', label: 'Categories', roles: ['admin','manager'] },
   { to: '/dashboard/suppliers', icon: '🚚', label: 'Suppliers',   roles: ['admin','manager'] },
   { to: '/dashboard/purchases', icon: '🛒', label: 'Purchases',   roles: ['admin','manager'] },
   { to: '/dashboard/pos',       icon: '💰', label: 'Point of Sale', roles: ['admin','manager','cashier'] },

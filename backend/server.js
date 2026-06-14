@@ -5,6 +5,9 @@ const rateLimit = require('express-rate-limit')
 
 const authRoutes = require('./routes/auth')
 const userRoutes = require('./routes/users')
+const categoryRoutes = require('./routes/categories')
+const productRoutes = require('./routes/products')
+const inventoryRoutes = require('./routes/inventory')
 
 const app = express()
 
@@ -33,15 +36,18 @@ app.use(globalLimiter)
 app.use('/api/auth', authLimiter)
 
 // ── Routes ────────────────────────────────────────────────────
-app.use('/api/auth',  authRoutes)
-app.use('/api/users', userRoutes)
+app.use('/api/auth',      authRoutes)
+app.use('/api/users',     userRoutes)
+app.use('/api/categories', categoryRoutes)
+app.use('/api/products',  productRoutes)
+app.use('/api/inventory', inventoryRoutes)
 
 // Health check
 app.get('/api/health', (req, res) => {
   res.json({
     status: 'ok',
     service: 'Vickers Cottage API',
-    phase: 'Phase 1 — Foundation',
+    phase: 'Phase 2 — Inventory',
     timestamp: new Date().toISOString(),
   })
 })

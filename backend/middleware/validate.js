@@ -40,10 +40,51 @@ const resetPasswordRules = [
     .matches(/[0-9]/).withMessage('Must contain a number'),
 ]
 
+// ── Categories ─────────────────────────────────────────────────
+const categoryRules = [
+  body('name').trim().notEmpty().withMessage('Category name is required')
+    .isLength({ max: 100 }).withMessage('Category name too long'),
+]
+
+// ── Products ───────────────────────────────────────────────────
+const productRules = [
+  body('name').trim().notEmpty().withMessage('Product name is required'),
+  body('sku').trim().notEmpty().withMessage('SKU is required')
+    .isLength({ max: 100 }).withMessage('SKU too long'),
+  body('category_id').optional({ nullable: true }).isInt().withMessage('Invalid category'),
+  body('purchase_price').isFloat({ min: 0 }).withMessage('Purchase price must be a positive number'),
+  body('selling_price').isFloat({ min: 0 }).withMessage('Selling price must be a positive number'),
+  body('stock_quantity').optional().isInt({ min: 0 }).withMessage('Stock quantity must be 0 or more'),
+  body('reorder_level').optional().isInt({ min: 0 }).withMessage('Reorder level must be 0 or more'),
+]
+
+const productUpdateRules = [
+  body('name').optional().trim().notEmpty().withMessage('Product name cannot be empty'),
+  body('sku').optional().trim().notEmpty().withMessage('SKU cannot be empty'),
+  body('category_id').optional({ nullable: true }).isInt().withMessage('Invalid category'),
+  body('purchase_price').optional().isFloat({ min: 0 }).withMessage('Purchase price must be a positive number'),
+  body('selling_price').optional().isFloat({ min: 0 }).withMessage('Selling price must be a positive number'),
+  body('reorder_level').optional().isInt({ min: 0 }).withMessage('Reorder level must be 0 or more'),
+]
+
+// ── Inventory Transactions ────────────────────────────────────
+const inventoryTransactionRules = [
+  body('product_id').isUUID().withMessage('Valid product ID required'),
+  body('transaction_type')
+    .isIn(['stock_in', 'stock_out', 'damaged', 'returned'])
+    .withMessage('Transaction type must be stock_in, stock_out, damaged, or returned'),
+  body('quantity').isInt({ min: 1 }).withMessage('Quantity must be at least 1'),
+  body('notes').optional().isString(),
+]
+
 module.exports = {
   handleValidation,
   loginRules,
   createUserRules,
   changePasswordRules,
   resetPasswordRules,
+  categoryRules,
+  productRules,
+  productUpdateRules,
+  inventoryTransactionRules,
 }
