@@ -1,0 +1,25 @@
+.history-row td {
+  background: #f8fafc;
+  padding: 16px !important;
+}
+
+.sub-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+}
+.sub-table th {
+  text-align: left;
+  padding: 6px 10px;
+  color: var(--text-muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
+  border-bottom: 1px solid var(--border);
+}
+.sub-table td {
+  padding: 6px 10px;
+  border-bottom: 1px solid #eef2f6;
+}
+.sub-table tr:last-child td { border-bottom: none; }

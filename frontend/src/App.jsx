@@ -8,12 +8,16 @@ import Users from './pages/Users'
 import Products from './pages/Products'
 import Categories from './pages/Categories'
 import Inventory from './pages/Inventory'
+import Suppliers from './pages/Suppliers'
+import Purchases from './pages/Purchases'
 import './pages/Login.css'
 import './layouts/DashboardLayout.css'
 import './pages/Users.css'
 import './pages/Products.css'
 import './pages/Categories.css'
 import './pages/Inventory.css'
+import './pages/Suppliers.css'
+import './pages/Purchases.css'
 
 // Placeholder pages for phases 3-5
 const ComingSoon = ({ title }) => (
@@ -46,8 +50,8 @@ export default function App() {
               <Route path="/dashboard/products"  element={<Products />} />
               <Route path="/dashboard/categories" element={<Categories />} />
               <Route path="/dashboard/inventory" element={<Inventory />} />
-              <Route path="/dashboard/suppliers" element={<ComingSoon title="Supplier Management — Phase 3" />} />
-              <Route path="/dashboard/purchases" element={<ComingSoon title="Purchase Management — Phase 3" />} />
+              <Route path="/dashboard/suppliers" element={<Suppliers />} />
+              <Route path="/dashboard/purchases" element={<Purchases />} />
               <Route path="/dashboard/reports"   element={<ComingSoon title="Reports & Analytics — Phase 5" />} />
             </Route>
           </Route>
