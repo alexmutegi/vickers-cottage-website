@@ -35,3 +35,10 @@ export const PurchasesAPI = {
   getOne: (id) => api.get(`/purchases/${id}`).then(r => r.data),
   create: (data) => api.post('/purchases', data).then(r => r.data),
 }
+
+export const SalesAPI = {
+  getAll: (params = {}) => api.get('/sales', { params }).then(r => r.data),
+  getOne: (id) => api.get(`/sales/${id}`).then(r => r.data),
+  create: (data) => api.post('/sales', data).then(r => r.data),
+  getDashboardSummary: () => api.get('/sales/dashboard/summary').then(r => r.data),
+}

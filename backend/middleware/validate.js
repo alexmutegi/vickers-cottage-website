@@ -104,6 +104,16 @@ const purchaseRules = [
   body('items.*.cost').isFloat({ min: 0 }).withMessage('Each item cost must be 0 or more'),
 ]
 
+// ── Sales (POS) ──────────────────────────────────────────────────
+const saleRules = [
+  body('payment_method')
+    .isIn(['cash', 'card', 'mobile_money'])
+    .withMessage('Payment method must be cash, card, or mobile_money'),
+  body('items').isArray({ min: 1 }).withMessage('At least one item is required'),
+  body('items.*.product_id').isUUID().withMessage('Each item needs a valid product ID'),
+  body('items.*.quantity').isInt({ min: 1 }).withMessage('Each item quantity must be at least 1'),
+]
+
 module.exports = {
   handleValidation,
   loginRules,
@@ -117,4 +127,5 @@ module.exports = {
   supplierRules,
   supplierUpdateRules,
   purchaseRules,
+  saleRules,
 }

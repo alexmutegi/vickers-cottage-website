@@ -1,0 +1,100 @@
+.receipt-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 300;
+  padding: 24px;
+}
+
+.receipt-modal {
+  background: var(--surface);
+  border-radius: 14px;
+  padding: 20px;
+  max-width: 380px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 16px 48px rgba(0,0,0,0.25);
+}
+
+.receipt-paper {
+  font-family: 'Courier New', monospace;
+  color: #1a2733;
+  padding: 8px 4px;
+}
+
+.receipt-header { text-align: center; margin-bottom: 12px; }
+.receipt-logo { font-size: 2rem; }
+.receipt-header h2 { font-size: 1.1rem; font-weight: 800; margin: 4px 0 2px; letter-spacing: 0.05em; }
+.receipt-subtitle { font-size: 0.7rem; color: #6b7c8d; }
+
+.receipt-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  font-size: 0.78rem;
+  margin-bottom: 10px;
+}
+.receipt-meta div { display: flex; justify-content: space-between; }
+.receipt-meta span:first-child { color: #6b7c8d; }
+.receipt-meta span:last-child { font-weight: 600; }
+
+.receipt-divider {
+  border-top: 1px dashed #c5d0dc;
+  margin: 8px 0;
+}
+
+.receipt-items { width: 100%; font-size: 0.76rem; border-collapse: collapse; }
+.receipt-items th {
+  text-align: left;
+  padding: 4px 2px;
+  border-bottom: 1px solid #c5d0dc;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.65rem;
+  letter-spacing: 0.03em;
+}
+.receipt-items th:nth-child(2),
+.receipt-items th:nth-child(3),
+.receipt-items th:nth-child(4) { text-align: right; }
+.receipt-items td { padding: 4px 2px; }
+.receipt-items td:nth-child(2),
+.receipt-items td:nth-child(3),
+.receipt-items td:nth-child(4) { text-align: right; }
+
+.receipt-total-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1rem;
+  font-weight: 800;
+  padding: 4px 0;
+}
+
+.receipt-footer {
+  text-align: center;
+  margin-top: 14px;
+  font-size: 0.78rem;
+}
+.receipt-small { font-size: 0.65rem; color: #6b7c8d; margin-top: 4px; }
+
+.receipt-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+}
+.receipt-actions button { flex: 1; }
+
+/* Print: only show the receipt paper */
+@media print {
+  body * { visibility: hidden; }
+  #receipt-print-area, #receipt-print-area * { visibility: visible; }
+  #receipt-print-area {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+  }
+  .receipt-actions, .receipt-overlay { display: none !important; }
+}
