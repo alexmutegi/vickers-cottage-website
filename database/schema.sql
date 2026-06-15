@@ -150,8 +150,8 @@ CREATE TRIGGER trg_products_updated_at BEFORE UPDATE ON products FOR EACH ROW EX
 CREATE TRIGGER trg_suppliers_updated_at BEFORE UPDATE ON suppliers FOR EACH ROW EXECUTE FUNCTION update_updated_at();
 
 -- ── Default admin user (password: Admin@1234) ────────────────
--- Replace password_hash with actual bcrypt hash before deploying
+-- Replace password_hash with your own bcrypt hash before going live in production
 INSERT INTO users (full_name, email, password_hash, role) VALUES
     ('System Admin', 'admin@vickerscottage.com',
-     '$2b$10$xKp8Q1jZ3mN7vL2sW9uYOeR5tG6hI0kA4nM8pQ3sV7wX1yZ2bC9dE', -- placeholder
+     '$2b$10$fd6eTNha5jx8NEpErjBkr.kvxALlgopanjAUPxL9gIATVrZ5vhgNm', -- bcrypt hash of "Admin@1234"
      'admin');

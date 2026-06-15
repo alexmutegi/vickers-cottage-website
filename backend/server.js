@@ -16,8 +16,21 @@ const reportRoutes = require('./routes/reports')
 const app = express()
 
 // ── Middleware ────────────────────────────────────────────────
+// FRONTEND_URL can be a single origin or a comma-separated list
+// (e.g. "https://app.vercel.app,http://localhost:5173")
+const allowedOrigins = (process.env.FRONTEND_URL || 'http://localhost:5173')
+  .split(',')
+  .map(o => o.trim())
+  .filter(Boolean)
+
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:5173',
+  origin: (origin, callback) => {
+    // Allow requests with no origin (curl, server-to-server, health checks)
+    if (!origin || allowedOrigins.includes(origin)) {
+      return callback(null, true)
+    }
+    callback(new Error('Not allowed by CORS'))
+  },
   credentials: true,
 }))
 
@@ -76,7 +89,7 @@ const PORT = process.env.PORT || 5000
 if (process.env.NODE_ENV !== 'test') {
   app.listen(PORT, () => {
     console.log(`🚀 Vickers Cottage API running on port ${PORT}`)
-    console.log(`📋 Phase 1 — Foundation`)
+    console.log(`📋 Phase 5 — Reporting (Complete)`)
     console.log(`🌐 Health: http://localhost:${PORT}/api/health`)
   })
 }
