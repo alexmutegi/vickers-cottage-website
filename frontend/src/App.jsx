@@ -11,6 +11,7 @@ import Inventory from './pages/Inventory'
 import Suppliers from './pages/Suppliers'
 import Purchases from './pages/Purchases'
 import POS from './pages/POS'
+import Reports from './pages/Reports'
 import './pages/Login.css'
 import './layouts/DashboardLayout.css'
 import './pages/Users.css'
@@ -21,15 +22,8 @@ import './pages/Suppliers.css'
 import './pages/Purchases.css'
 import './pages/POS.css'
 import './components/Receipt.css'
+import './pages/Reports.css'
 
-// Placeholder pages for phases 3-5
-const ComingSoon = ({ title }) => (
-  <div style={{ padding: 40, textAlign: 'center', color: '#6b7c8d' }}>
-    <div style={{ fontSize: '3rem', marginBottom: 16 }}>🚧</div>
-    <h2 style={{ color: '#1e3a5f', marginBottom: 8 }}>{title}</h2>
-    <p>This feature will be available in the next development phase.</p>
-  </div>
-)
 
 export default function App() {
   return (
@@ -55,7 +49,7 @@ export default function App() {
               <Route path="/dashboard/inventory" element={<Inventory />} />
               <Route path="/dashboard/suppliers" element={<Suppliers />} />
               <Route path="/dashboard/purchases" element={<Purchases />} />
-              <Route path="/dashboard/reports"   element={<ComingSoon title="Reports & Analytics — Phase 5" />} />
+              <Route path="/dashboard/reports"   element={<Reports />} />
             </Route>
           </Route>
 

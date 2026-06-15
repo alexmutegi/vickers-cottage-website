@@ -42,3 +42,11 @@ export const SalesAPI = {
   create: (data) => api.post('/sales', data).then(r => r.data),
   getDashboardSummary: () => api.get('/sales/dashboard/summary').then(r => r.data),
 }
+
+export const ReportsAPI = {
+  getDailySales:   (date) => api.get('/reports/daily-sales', { params: { date } }).then(r => r.data),
+  getMonthlySales: (year, month) => api.get('/reports/monthly-sales', { params: { year, month } }).then(r => r.data),
+  getInventory:    () => api.get('/reports/inventory').then(r => r.data),
+  getLowStock:     () => api.get('/reports/low-stock').then(r => r.data),
+  getProfit:       (start_date, end_date) => api.get('/reports/profit', { params: { start_date, end_date } }).then(r => r.data),
+}
