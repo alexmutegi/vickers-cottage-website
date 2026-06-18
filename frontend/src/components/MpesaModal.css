@@ -1,0 +1,106 @@
+.mpesa-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 250;
+  padding: 20px;
+}
+
+.mpesa-modal {
+  background: var(--surface);
+  border-radius: 16px;
+  width: 100%;
+  max-width: 400px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+}
+
+.mpesa-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 20px;
+  background: #00a651;
+  color: #fff;
+}
+.mpesa-logo { font-size: 2rem; }
+.mpesa-header h2 { font-size: 1rem; font-weight: 700; margin-bottom: 2px; }
+.mpesa-header p  { font-size: 0.9rem; opacity: 0.9; font-weight: 600; }
+.mpesa-close {
+  margin-left: auto;
+  background: rgba(255,255,255,0.15);
+  border: none; color: #fff;
+  width: 28px; height: 28px;
+  border-radius: 50%; cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.mpesa-body { padding: 20px; display: flex; flex-direction: column; gap: 16px; }
+.field-hint { font-size: 0.72rem; color: var(--text-muted); }
+
+.mpesa-actions { display: flex; gap: 10px; }
+.mpesa-actions .btn-outline,
+.mpesa-actions .btn-mpesa { flex: 1; }
+
+.btn-mpesa {
+  flex: 1;
+  padding: 12px 20px;
+  background: #00a651;
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.btn-mpesa:hover { background: #008a44; }
+
+/* Waiting animation */
+.mpesa-waiting { align-items: center; text-align: center; padding: 28px 20px; gap: 12px; }
+.mpesa-waiting h3 { font-size: 1.05rem; font-weight: 700; }
+.mpesa-waiting p { font-size: 0.85rem; color: var(--text-muted); max-width: 280px; }
+
+.mpesa-pulse {
+  position: relative;
+  width: 70px; height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.mpesa-pulse-ring {
+  position: absolute;
+  inset: 0;
+  border: 3px solid #00a651;
+  border-radius: 50%;
+  animation: mpesa-pulse 1.8s ease-out infinite;
+  opacity: 0;
+}
+@keyframes mpesa-pulse {
+  0%   { transform: scale(0.5); opacity: 0.8; }
+  100% { transform: scale(1.4); opacity: 0; }
+}
+.mpesa-pulse-icon { font-size: 2.2rem; position: relative; z-index: 1; }
+
+.mpesa-timer {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  background: #f0f4f8;
+  padding: 4px 14px;
+  border-radius: 20px;
+}
+
+/* Result states */
+.mpesa-result { align-items: center; text-align: center; padding: 28px 20px; }
+.mpesa-result .result-icon { font-size: 3rem; margin-bottom: 8px; }
+.mpesa-result h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; }
+.mpesa-result p { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 4px; }
+.amount-display { font-size: 1.2rem; font-weight: 800; color: #00a651 !important; margin: 8px 0 !important; }
+
+@media (max-width: 480px) {
+  .mpesa-overlay { padding: 0; align-items: flex-end; }
+  .mpesa-modal { border-radius: 18px 18px 0 0; max-width: 100%; }
+}

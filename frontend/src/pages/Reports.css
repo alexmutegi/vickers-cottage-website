@@ -101,3 +101,38 @@
 .margin-display { text-align: center; padding: 12px 0; }
 .margin-value { font-size: 2.6rem; font-weight: 900; }
 .margin-note { font-size: 0.85rem; color: var(--text-muted); margin-top: 6px; }
+
+/* Section card header with export buttons */
+.section-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.section-card-header h2 { margin-bottom: 0; }
+
+/* Export buttons */
+.export-buttons { display: flex; gap: 6px; }
+.btn-export {
+  padding: 6px 14px;
+  border: 1.5px solid var(--border);
+  background: #f8fafc;
+  border-radius: 8px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--text);
+  white-space: nowrap;
+  transition: 0.15s;
+}
+.btn-export:hover:not(:disabled) { border-color: var(--primary); background: #eaf2fb; }
+.btn-export:disabled { opacity: 0.5; cursor: not-allowed; }
+.btn-export-xlsx { background: #f0faf5; border-color: #b2dfce; color: #1a7a4a; }
+.btn-export-xlsx:hover:not(:disabled) { background: #1a7a4a; color: #fff; border-color: #1a7a4a; }
+
+@media (max-width: 600px) {
+  .section-card-header { flex-direction: column; align-items: flex-start; }
+  .report-controls { flex-direction: column; align-items: stretch; }
+}

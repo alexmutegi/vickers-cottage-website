@@ -2,6 +2,44 @@ import { useState, useEffect, useCallback } from 'react'
 import { ReportsAPI } from '../services/inventoryApi'
 import './Reports.css'
 
+const API_BASE = import.meta.env.VITE_API_URL || '/api'
+
+// Build an authenticated download URL by triggering a token-bearing fetch
+const downloadExport = async (path) => {
+  const token = localStorage.getItem('accessToken')
+  const res = await fetch(`${API_BASE}${path}`, {
+    headers: { Authorization: `Bearer ${token}` },
+  })
+  if (!res.ok) throw new Error('Export failed')
+  const disposition = res.headers.get('Content-Disposition') || ''
+  const filename = disposition.match(/filename="(.+?)"/)?.[1] || 'export'
+  const blob = await res.blob()
+  const url  = URL.createObjectURL(blob)
+  const a    = document.createElement('a')
+  a.href = url; a.download = filename; a.click()
+  URL.revokeObjectURL(url)
+}
+
+function ExportButtons({ path }) {
+  const [busy, setBusy] = useState(false)
+  const doExport = async (fmt) => {
+    setBusy(true)
+    try { await downloadExport(`${path}?format=${fmt}`) }
+    catch { alert('Export failed. Make sure you are online.') }
+    finally { setBusy(false) }
+  }
+  return (
+    <div className="export-buttons">
+      <button className="btn-export" onClick={() => doExport('csv')} disabled={busy}>
+        ⬇ CSV
+      </button>
+      <button className="btn-export btn-export-xlsx" onClick={() => doExport('xlsx')} disabled={busy}>
+        📊 Excel
+      </button>
+    </div>
+  )
+}
+
 const TABS = [
   { key: 'daily',    label: 'Daily Sales',    icon: '📅' },
   { key: 'monthly',  label: 'Monthly Sales',  icon: '📆' },
@@ -284,7 +322,10 @@ function ProfitReport() {
           </div>
 
           <div className="section-card">
-            <h2>Profit by Product</h2>
+            <div className="section-card-header">
+              <h2>Profit by Product</h2>
+              <ExportButtons path={`/exports/sales?start_date=${startDate}&end_date=${endDate}`} />
+            </div>
             {data.by_product.length === 0 ? (
               <p className="empty-cell">No sales recorded in this date range</p>
             ) : (
@@ -342,7 +383,10 @@ function InventoryReport() {
           </div>
 
           <div className="section-card">
-            <h2>Inventory by Category</h2>
+            <div className="section-card-header">
+              <h2>Inventory by Category</h2>
+              <ExportButtons path="/exports/inventory" />
+            </div>
             <div className="table-scroll">
               <table className="data-table">
                 <thead><tr><th>Category</th><th>Products</th><th>Units in Stock</th><th>Cost Value</th><th>Retail Value</th><th>Potential Profit</th></tr></thead>
@@ -388,7 +432,10 @@ function LowStockReport() {
         <div className="loading-box"><div className="spinner" /> Loading report…</div>
       ) : (
         <div className="section-card">
-          <h2>Products Below Reorder Level ({products.length})</h2>
+          <div className="section-card-header">
+            <h2>Products Below Reorder Level ({products.length})</h2>
+            {products.length > 0 && <ExportButtons path="/exports/low-stock" />}
+          </div>
           {products.length === 0 ? (
             <p className="empty-cell">🎉 All products are above their reorder level</p>
           ) : (

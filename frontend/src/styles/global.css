@@ -1,0 +1,287 @@
+/* ═══════════════════════════════════════════════════════════
+   Vickers Cottage — Global Component Styles (Phase 6)
+   Mobile-first, shared across all pages
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── Alerts ──────────────────────────────────────────────── */
+.alert {
+  padding: 12px 16px;
+  border-radius: var(--radius);
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.4;
+}
+.alert-error   { background: #fdecea; color: #c0392b; border: 1px solid #f5c6c2; }
+.alert-success { background: #f0faf5; color: #1a7a4a; border: 1px solid #b2dfce; }
+.alert-info    { background: #eaf2fb; color: #1e3a5f; border: 1px solid #b3cde8; }
+.alert-warning { background: #fff7e6; color: #b8860b; border: 1px solid #fde3a7; }
+
+/* ── Buttons ─────────────────────────────────────────────── */
+.btn-primary {
+  padding: 10px 20px;
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+  white-space: nowrap;
+}
+.btn-primary:hover:not(:disabled) { background: var(--primary-light); }
+.btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.btn-outline {
+  padding: 10px 20px;
+  background: transparent;
+  color: var(--primary);
+  border: 1.5px solid var(--primary);
+  border-radius: var(--radius);
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.btn-outline:hover:not(:disabled) { background: var(--primary); color: #fff; }
+.btn-outline:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.btn-danger {
+  padding: 6px 14px;
+  background: #fdecea;
+  color: #c0392b;
+  border: 1px solid #f5c6c2;
+  border-radius: 8px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.15s;
+}
+.btn-danger:hover:not(:disabled) { background: #c0392b; color: #fff; }
+
+.btn-sm {
+  padding: 5px 12px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  border: none;
+  transition: 0.15s;
+}
+.btn-success { background: #f0faf5; color: #1a7a4a; }
+.btn-success:hover { background: #1a7a4a; color: #fff; }
+
+/* ── Forms ───────────────────────────────────────────────── */
+.form-group { display: flex; flex-direction: column; gap: 6px; }
+.form-group label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+.form-group input,
+.form-group select,
+.form-group textarea {
+  padding: 10px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 0.9rem;
+  font-family: inherit;
+  background: #f8fafc;
+  color: var(--text);
+  outline: none;
+  transition: 0.15s;
+  width: 100%;
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus { border-color: var(--primary); background: #fff; box-shadow: 0 0 0 3px rgba(30,58,95,0.08); }
+.form-group textarea { min-height: 80px; resize: vertical; }
+
+/* ── Modals ──────────────────────────────────────────────── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  z-index: 200;
+  padding: 20px;
+  overflow-y: auto;
+}
+.modal {
+  background: var(--surface);
+  border-radius: 14px;
+  width: 100%;
+  max-width: 520px;
+  box-shadow: 0 16px 48px rgba(0,0,0,0.2);
+  margin: auto;
+}
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px 0;
+}
+.modal-header h2 { font-size: 1.05rem; font-weight: 700; }
+.modal-close {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: var(--text-muted);
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+.modal-close:hover { background: #f0f4f8; }
+.modal-form { padding: 20px 24px 24px; display: flex; flex-direction: column; gap: 14px; }
+.modal-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 4px; }
+
+/* ── Tables ──────────────────────────────────────────────── */
+.table-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+  min-width: 500px;
+}
+.data-table th {
+  text-align: left;
+  padding: 12px 16px;
+  background: #f8fafc;
+  color: var(--text-muted);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+.data-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid #eef2f6;
+  vertical-align: middle;
+}
+.data-table tr:last-child td { border-bottom: none; }
+.data-table tbody tr:hover td { background: #f8fafc; }
+.empty-cell { text-align: center; padding: 32px !important; color: var(--text-muted); font-size: 0.88rem; min-width: unset; }
+
+/* sub-table (inside expanded rows) */
+.sub-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; min-width: unset; }
+.sub-table th {
+  text-align: left; padding: 6px 10px;
+  color: var(--text-muted); font-weight: 600;
+  text-transform: uppercase; font-size: 0.7rem;
+  letter-spacing: 0.04em; border-bottom: 1px solid var(--border);
+}
+.sub-table td { padding: 6px 10px; border-bottom: 1px solid #eef2f6; }
+.sub-table tr:last-child td { border-bottom: none; }
+
+/* ── Loading ─────────────────────────────────────────────── */
+.loading-box {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--text-muted);
+  font-size: 0.88rem;
+  padding: 32px 0;
+  justify-content: center;
+}
+.spinner {
+  width: 20px; height: 20px;
+  border: 2.5px solid var(--border);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  flex-shrink: 0;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── Page structure ──────────────────────────────────────── */
+.page-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.page-header h1 { font-size: 1.5rem; font-weight: 700; color: var(--text); line-height: 1.2; }
+.page-subtitle { font-size: 0.85rem; color: var(--text-muted); margin-top: 4px; }
+
+.section-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+}
+.section-card h2 { font-size: 1rem; font-weight: 700; margin-bottom: 14px; color: var(--text); }
+
+/* ── Filters ─────────────────────────────────────────────── */
+.filters-bar {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.filter-input {
+  flex: 1;
+  min-width: 200px;
+  padding: 10px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 0.9rem;
+  outline: none;
+  background: #f8fafc;
+}
+.filter-input:focus { border-color: var(--primary); background: #fff; }
+.filter-select {
+  padding: 10px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 0.9rem;
+  background: #f8fafc;
+  color: var(--text);
+  outline: none;
+}
+.filter-checkbox {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 0.88rem; color: var(--text-muted); cursor: pointer; white-space: nowrap;
+}
+
+/* ── Pagination ──────────────────────────────────────────── */
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  padding: 8px 0;
+  flex-wrap: wrap;
+}
+
+/* ── Mobile touch improvements ───────────────────────────── */
+@media (max-width: 768px) {
+  .page-header h1 { font-size: 1.25rem; }
+  .modal-overlay { padding: 0; align-items: flex-end; }
+  .modal { border-radius: 18px 18px 0 0; max-width: 100%; max-height: 95vh; overflow-y: auto; margin: 0; }
+  .data-table { font-size: 0.82rem; }
+  .data-table th, .data-table td { padding: 10px 12px; }
+  .filters-bar { flex-direction: column; align-items: stretch; }
+  .filter-input, .filter-select { min-width: 0; }
+  .btn-primary, .btn-outline { padding: 12px 18px; font-size: 0.92rem; }
+  /* Larger tap targets for mobile */
+  .btn-sm { padding: 8px 14px; font-size: 0.82rem; }
+}
+
+/* ── Print utilities ─────────────────────────────────────── */
+@media print {
+  .no-print { display: none !important; }
+}
