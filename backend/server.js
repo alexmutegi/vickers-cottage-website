@@ -12,6 +12,8 @@ const supplierRoutes = require('./routes/suppliers')
 const purchaseRoutes = require('./routes/purchases')
 const saleRoutes = require('./routes/sales')
 const reportRoutes = require('./routes/reports')
+const mpesaRoutes  = require('./routes/mpesa')
+const exportRoutes = require('./routes/exports')
 
 const app = express()
 
@@ -62,13 +64,15 @@ app.use('/api/suppliers', supplierRoutes)
 app.use('/api/purchases', purchaseRoutes)
 app.use('/api/sales',     saleRoutes)
 app.use('/api/reports',   reportRoutes)
+app.use('/api/mpesa',    mpesaRoutes)
+app.use('/api/exports',  exportRoutes)
 
 // Health check
 app.get('/api/health', (req, res) => {
   res.json({
     status: 'ok',
     service: 'Vickers Cottage API',
-    phase: 'Phase 5 — Reporting',
+    phase: 'Phase 6 — Advanced Features',
     timestamp: new Date().toISOString(),
   })
 })

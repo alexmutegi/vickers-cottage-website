@@ -39,6 +39,10 @@ export default function Dashboard() {
     { icon: '✅', label: 'Purchase Management',   done: true  },
     { icon: '✅', label: 'Point of Sale',         done: true  },
     { icon: '✅', label: 'Reporting',             done: true  },
+    { icon: '✅', label: 'Mobile Optimisation',   done: true  },
+    { icon: '✅', label: 'Barcode Scanner',        done: true  },
+    { icon: '✅', label: 'M-Pesa Integration',     done: true  },
+    { icon: '✅', label: 'CSV / Excel Exports',    done: true  },
   ]
 
   const fmt = (n) => `KES ${Number(n || 0).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
@@ -48,9 +52,9 @@ export default function Dashboard() {
       <div className="page-header">
         <div>
           <h1>Welcome back, {user?.full_name?.split(' ')[0]} 👋</h1>
-          <p className="page-subtitle">Vickers Cottage Inventory & POS — Phase 5: Reporting</p>
+          <p className="page-subtitle">Vickers Cottage Inventory & POS — Phase 6: Advanced Features</p>
         </div>
-        <div className="phase-badge">Phase 5</div>
+        <div className="phase-badge">Phase 6</div>
       </div>
 
       {/* Summary cards */}
@@ -165,7 +169,7 @@ export default function Dashboard() {
           <table className="info-table">
             <tbody>
               <tr><td>Project</td><td>Vickers Cottage Inventory & POS</td></tr>
-              <tr><td>Phase</td><td><strong>Phase 5 — Reporting (Complete)</strong></td></tr>
+              <tr><td>Phase</td><td><strong>Phase 6 — Advanced Features</strong></td></tr>
               <tr><td>Frontend</td><td>React + Vite</td></tr>
               <tr><td>Backend</td><td>Node.js + Express</td></tr>
               <tr><td>Database</td><td>PostgreSQL (Supabase)</td></tr>

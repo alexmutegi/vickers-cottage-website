@@ -149,6 +149,25 @@ CREATE TRIGGER trg_users_updated_at    BEFORE UPDATE ON users    FOR EACH ROW EX
 CREATE TRIGGER trg_products_updated_at BEFORE UPDATE ON products FOR EACH ROW EXECUTE FUNCTION update_updated_at();
 CREATE TRIGGER trg_suppliers_updated_at BEFORE UPDATE ON suppliers FOR EACH ROW EXECUTE FUNCTION update_updated_at();
 
+-- ── Phase 6: M-Pesa transactions ──────────────────────────────
+CREATE TABLE IF NOT EXISTS mpesa_transactions (
+    id                   UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    checkout_request_id  VARCHAR(100) UNIQUE NOT NULL,
+    merchant_request_id  VARCHAR(100),
+    phone_number         VARCHAR(20) NOT NULL,
+    amount               DECIMAL(12,2) NOT NULL,
+    status               VARCHAR(20) DEFAULT 'pending' CHECK (status IN ('pending','success','failed','cancelled')),
+    mpesa_receipt        VARCHAR(50),
+    failure_reason       TEXT,
+    sale_id              UUID REFERENCES sales(id) ON DELETE SET NULL,
+    created_at           TIMESTAMP DEFAULT NOW(),
+    updated_at           TIMESTAMP DEFAULT NOW()
+);
+
+CREATE TRIGGER trg_mpesa_updated_at BEFORE UPDATE ON mpesa_transactions FOR EACH ROW EXECUTE FUNCTION update_updated_at();
+CREATE INDEX IF NOT EXISTS idx_mpesa_checkout ON mpesa_transactions(checkout_request_id);
+CREATE INDEX IF NOT EXISTS idx_mpesa_sale ON mpesa_transactions(sale_id);
+
 -- ── Default admin user (password: Admin@1234) ────────────────
 -- Replace password_hash with your own bcrypt hash before going live in production
 INSERT INTO users (full_name, email, password_hash, role) VALUES
