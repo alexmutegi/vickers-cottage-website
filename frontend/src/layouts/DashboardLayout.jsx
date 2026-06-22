@@ -12,6 +12,7 @@ const NAV_ITEMS = [
   { to: '/dashboard/pos',       icon: '💰', label: 'Point of Sale', roles: ['admin','manager','cashier'] },
   { to: '/dashboard/inventory', icon: '📋', label: 'Inventory',   roles: ['admin','manager'] },
   { to: '/dashboard/reports',   icon: '📈', label: 'Reports',     roles: ['admin','manager'] },
+  { to: '/dashboard/status',    icon: '🩺', label: 'System Status', roles: ['admin','manager'] },
   { to: '/dashboard/users',     icon: '👥', label: 'Users',       roles: ['admin'] },
 ]
 

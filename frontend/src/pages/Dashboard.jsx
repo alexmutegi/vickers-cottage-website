@@ -43,6 +43,11 @@ export default function Dashboard() {
     { icon: '✅', label: 'Barcode Scanner',        done: true  },
     { icon: '✅', label: 'M-Pesa Integration',     done: true  },
     { icon: '✅', label: 'CSV / Excel Exports',    done: true  },
+    { icon: '✅', label: 'Structured Logging',      done: true  },
+    { icon: '✅', label: 'Security Headers',        done: true  },
+    { icon: '✅', label: 'Graceful Shutdown',       done: true  },
+    { icon: '✅', label: 'Sentry Error Monitoring', done: true  },
+    { icon: '✅', label: 'System Status Page',      done: true  },
   ]
 
   const fmt = (n) => `KES ${Number(n || 0).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
@@ -52,9 +57,9 @@ export default function Dashboard() {
       <div className="page-header">
         <div>
           <h1>Welcome back, {user?.full_name?.split(' ')[0]} 👋</h1>
-          <p className="page-subtitle">Vickers Cottage Inventory & POS — Phase 6: Advanced Features</p>
+          <p className="page-subtitle">Vickers Cottage Inventory & POS — Phase 7: Production</p>
         </div>
-        <div className="phase-badge">Phase 6</div>
+        <div className="phase-badge phase-badge-prod">Phase 7 ✓</div>
       </div>
 
       {/* Summary cards */}
@@ -169,7 +174,7 @@ export default function Dashboard() {
           <table className="info-table">
             <tbody>
               <tr><td>Project</td><td>Vickers Cottage Inventory & POS</td></tr>
-              <tr><td>Phase</td><td><strong>Phase 6 — Advanced Features</strong></td></tr>
+              <tr><td>Phase</td><td><strong>Phase 7 — Production (Complete)</strong></td></tr>
               <tr><td>Frontend</td><td>React + Vite</td></tr>
               <tr><td>Backend</td><td>Node.js + Express</td></tr>
               <tr><td>Database</td><td>PostgreSQL (Supabase)</td></tr>
@@ -190,6 +195,7 @@ export default function Dashboard() {
               { icon: '🚚', label: 'Suppliers',   path: '/dashboard/suppliers', active: true },
               { icon: '🛒', label: 'Purchases',   path: '/dashboard/purchases', active: true },
               { icon: '📈', label: 'Reports',     path: '/dashboard/reports',   active: true },
+              { icon: '🩺', label: 'System Status', path: '/dashboard/status', active: true },
             ].map(l => (
               l.active ? (
                 <a key={l.label} href={l.path} className="quick-link">
