@@ -17,6 +17,9 @@
   font-size: 0.82rem;
   font-weight: 600;
 }
+.phase-badge-prod {
+  background: linear-gradient(135deg, #1a7a4a, #1e3a5f);
+}
 
 .stats-grid {
   display: grid;

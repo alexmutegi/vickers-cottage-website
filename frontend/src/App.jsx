@@ -12,6 +12,7 @@ import Suppliers from './pages/Suppliers'
 import Purchases from './pages/Purchases'
 import POS from './pages/POS'
 import Reports from './pages/Reports'
+import Status from './pages/Status'
 import './styles/global.css'
 import './pages/Login.css'
 import './layouts/DashboardLayout.css'
@@ -26,6 +27,7 @@ import './components/Receipt.css'
 import './components/BarcodeScanner.css'
 import './components/MpesaModal.css'
 import './pages/Reports.css'
+import './pages/Status.css'
 
 
 export default function App() {
@@ -53,6 +55,7 @@ export default function App() {
               <Route path="/dashboard/suppliers" element={<Suppliers />} />
               <Route path="/dashboard/purchases" element={<Purchases />} />
               <Route path="/dashboard/reports"   element={<Reports />} />
+              <Route path="/dashboard/status"    element={<Status />} />
             </Route>
           </Route>
 
